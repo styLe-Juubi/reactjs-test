@@ -4,8 +4,14 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import usePokemons from "../../hooks/usePokemons";
 import * as S from "./Login.styled";
+import { Navigate } from "react-router-dom";
+import { useStore } from "../../context/store";
 
 export default function Login() {
+  const user = useStore(( store ) => store.user );
+  if ( user )
+    return <Navigate to="/pokemons"/>
+  
   const { isLoading, data: pokemons } = usePokemons();
 
   return (
